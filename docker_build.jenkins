@@ -1,5 +1,5 @@
 #!groovy
-// Check  properties
+// Run docker build
 properties([disableConcurrentBuilds()])
 
 pipeline {
@@ -11,20 +11,13 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("First step") {
-            steps {
-                sh 'ssh root@192.168.1.50 \'hostname\''
-            }
-        }
-         stage("create docker image") {
+        stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
                 dir ('/') {
                 	sh 'docker build . '
+                }
             }
         }
     }
 }
-
-
-
